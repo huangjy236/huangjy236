@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+int n,x,y;
+int hua(int Z,int W);
+void grade(int s);
+int main()
+{
+	int t,d=0,answer,result,s=0,a[10],i;
+	char f[2]={'+','-'};
+	srand((unsigned)time(NULL));
+	for(n=1,i=0;n<=10;n++,i++)
+	{
+		x=(int)rand()%50;
+		y=(int)rand()%50;
+		d=rand()%2;
+		if(f[d]=='+')
+			result=x+y;
+		else
+		{
+			if(x<y)
+			{
+				t=x;
+				x=y;
+				y=t;
+			}
+			result=x-y;
+		}
+		printf("(第%d题)%d%c%d=",n,x,f[d],y);
+		scanf("%d",&answer);
+		a[i]=hua(answer,result);
+		s=s+a[i];
+	}
+	printf("你的总分是：%d ",s);
+	grade(s);
+	printf("\n");
+}
+int hua(int Z,int W)
+{
+	int m;
+	int d=0;
+	char f[2]={'+','-'};
+	d=rand()%2;
+	if(Z==W)
+	{
+		printf("答对了！真棒！\n");
+		return 10;
+	}
+	else
+	{
+		printf("回答错啦！再来一遍：\n");
+		printf("(第%d题)%d%c%d=",n,x,f[d],y);
+		scanf("%d",&m);
+		if(m==W)
+		{
+			printf("答对了！真棒！\n");
+			return 7;
+		}
+		else
+		{
+			printf("又回答错啦！最后一遍：\n");
+			printf("(第%d题)%d%c%d=",n,x,f[d],y);
+			scanf("%d",&m);
+			if(m==W)
+			{
+				printf("答对了！真棒！\n");
+				return 5;
+			}
+			else
+				printf("真可惜！正确答案是：%d\n",W);
+				return 0;
+		}
+	}
+}
+void grade(int s)
+{
+	if(s>=90)
+		printf("\n*****SMART!（优秀！）*****");
+	if(s<90&&s>=80)
+		printf("\n*****GOOD!（良好！）*****");
+	if(s<80&&s>=70)
+		printf("\n*****OK!（一般！）*****");
+	if(s<70&&s>=60)
+		printf("\n*****PASS!（及格！）*****");
+	if(s<60)
+		printf("\n*****TRY AGAIN?（再试一次？）*****");
+}
